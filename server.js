@@ -11,7 +11,7 @@ const cors = require("cors")
 const fs = require('fs');
 
 if (!fs.existsSync("uploads")) {
-  fs.mkdirSync(uploadDir, { recursive: true });
+  fs.mkdirSync("uploads", { recursive: true });
   console.log('Uploads folder created.');
 }
 
