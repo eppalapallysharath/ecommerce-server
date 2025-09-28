@@ -10,7 +10,7 @@ const cartRoute = require("./routes/cartRoutes.js")
 const cors = require("cors")
 const fs = require('fs');
 
-if (!fs.existsSync(uploadDir)) {
+if (!fs.existsSync("uploads")) {
   fs.mkdirSync(uploadDir, { recursive: true });
   console.log('Uploads folder created.');
 }
