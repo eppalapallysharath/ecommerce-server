@@ -40,7 +40,7 @@ const addToCart = async (req, res) => {
 
 const getAllCart = async (req, res) => {
   try {
-    const cartData = await CartModel.find({ userId: req.user._id });
+    const cartData = await CartModel.find({ userId: req.user._id }).populate("productId");
     if (cartData.length > 0) {
       res
         .status(200)
