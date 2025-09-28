@@ -9,7 +9,7 @@ const userRoute = require("./routes/userRoutes.js");
 const cartRoute = require("./routes/cartRoutes.js")
 const cors = require("cors")
 
-app.use(cors())
+app.use(cors({origin:["http://localhost:5173"]}))
 
 app.use(express.json());
 app.use(express.urlencoded(true));
