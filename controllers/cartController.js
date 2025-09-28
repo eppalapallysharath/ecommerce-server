@@ -58,20 +58,40 @@ const getAllCart = async (req, res) => {
   }
 };
 
-const deleteFromCart = async(req, res) => {
+// const deleteFromCart = async(req, res) => {
+//   try {
+//     const {id} = req.params 
+//     const check = await CartModel.find({productId:id, userId: req.user._id});
+//     if(check){
+//         const deleteItem = await CartModel.deleteOne({productId:id, userId: req.user._id});
+//         return res.status(204).json({message:"Item deleted from cart successfully"})
+//     }else{
+//         return res.status(404).json({message:"No item found in cart"})
+//     }
+//   } catch (error) {
+//     console.log(error);
+//     res.status(400).json({ message: "something went wrong try again" });
+//   }
+// };
+const deleteFromCart = async (req, res) => {
   try {
-    const {id} = req.params 
-    const check = await CartModel.find({productId:id, userId: req.user._id});
-    if(check){
-        const deleteItem = await CartModel.deleteOne({productId:id, userId: req.user._id});
-        return res.status(204).json({message:"Item deleted from cart successfully"})
-    }else{
-        return res.status(404).json({message:"No item found in cart"})
+    const { productId } = req.params;
+
+    // Find one cart item for the user and product
+    const cartItem = await CartModel.findOne({ productId: productId, userId: req.user._id });
+
+    if (!cartItem) {
+      return res.status(404).json({ message: "No item found in cart" });
     }
+
+    await CartModel.deleteOne({ _id: cartItem._id });
+
+    return res.status(200).json({ message: "Item deleted from cart successfully" });
   } catch (error) {
-    console.log(error);
-    res.status(400).json({ message: "something went wrong try again" });
+    console.error(error);
+    return res.status(500).json({ message: "Something went wrong. Please try again." });
   }
 };
+
 
 module.exports = { addToCart, getAllCart, deleteFromCart };

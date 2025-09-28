@@ -5,6 +5,6 @@ const {authentication, authorization} =require("../middlewares/authmiddlewares.j
 
 router.post("/add", authentication, authorization("user"), addToCart)
 router.get("/getAll", authentication, authorization("user"), getAllCart)
-router.delete("/delete/:id",authentication, authorization("user") ,deleteFromCart )
+router.delete("/delete/:productId",authentication, authorization("user") ,deleteFromCart )
 
 module.exports=router
