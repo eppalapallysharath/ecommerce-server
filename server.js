@@ -8,8 +8,15 @@ const productRoute = require("./routes/productRoute.js");
 const userRoute = require("./routes/userRoutes.js");
 const cartRoute = require("./routes/cartRoutes.js")
 const cors = require("cors")
+const fs = require('fs');
+
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+  console.log('Uploads folder created.');
+}
 
 app.use(cors({origin:["http://localhost:5173"]}))
+
 
 app.use(express.json());
 app.use(express.urlencoded(true));
