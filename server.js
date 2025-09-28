@@ -7,6 +7,9 @@ connectDB();
 const productRoute = require("./routes/productRoute.js");
 const userRoute = require("./routes/userRoutes.js");
 const cartRoute = require("./routes/cartRoutes.js")
+const cors = require("cors")
+
+app.use(cors())
 
 app.use(express.json());
 app.use(express.urlencoded(true));
